@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/* ============================================
+   WARUNG BU BAKHTIAR — Design System
+   Filosofi: Hangat, Asli, Tidak Klise
+   (Font dimuat via <link> di layout.tsx)
+   ============================================ */
+
+:root {
+  /* Palet warna dari dapur asli — bukan dari color picker AI */
+  --cream:        #f5f0e8;
+  --cream-dark:   #ede6d4;
+  --ink:          #1c1209;
+  --ink-soft:     #3d2c1e;
+  --terracotta:   #b8521a;
+  --terracotta-light: #d4703a;
+  --sienna:       #8b3a10;
+  --gold:         #c8961f;
+  --olive:        #5a5734;
+  --charcoal:     #2a2018;
+
+  --font-serif:   'Playfair Display', Georgia, serif;
+  --font-sans:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', monospace;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ——— Tipografi ——— */
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+/* ——— Scrollbar ——— */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--sienna); }
+
+/* ——— Animasi organik ——— */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes drift-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slow-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  48%       { opacity: 1; }
+  50%       { opacity: 0.85; }
+  52%       { opacity: 1; }
+}
+
+@keyframes stamp-in {
+  from { opacity: 0; transform: scale(1.2) rotate(-3deg); }
+  to   { opacity: 1; transform: scale(1) rotate(-3deg); }
+}
+
+@keyframes ink-spread {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0% 0 0); }
+}
+
+.anim-rise        { animation: rise 0.7s cubic-bezier(.25,.46,.45,.94) both; }
+.anim-drift-left  { animation: drift-left 0.7s cubic-bezier(.25,.46,.45,.94) both; }
+.anim-drift-right { animation: drift-right 0.7s cubic-bezier(.25,.46,.45,.94) both; }
+.anim-stamp       { animation: stamp-in 0.4s cubic-bezier(.25,.46,.45,.94) both; }
+.delay-100  { animation-delay: 0.1s; }
+.delay-200  { animation-delay: 0.2s; }
+.delay-300  { animation-delay: 0.3s; }
+.delay-500  { animation-delay: 0.5s; }
+
+/* ——— Noise texture overlay ——— */
+
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* ——— Garis dekoratif ——— */
+
+.rule-terracotta {
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--terracotta);
+  margin-bottom: 1.5rem;
+}
+
+.rule-gold {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* ——— Selection color ——— */
+
+::selection {
+  background: var(--terracotta);
+  color: var(--cream);
+}
